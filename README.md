@@ -10,3 +10,4 @@ Create new extension attribute with script at Jamf Pro, and paste code from **ch
 
 1. Get package identifier of the antivirus software: `pkgutil --pkgs`
 2. Add item in *AV_LIST*: "AV_NAME PACKAGE_IDENTIFIER"
+(You cannot use whitespace in *AV_NAME*)
