@@ -1,4 +1,4 @@
-# nayuta/jamf-check-antivirus
+# jamf-check-antivirus
 
 Detect installed antivirus software by package list.
 
