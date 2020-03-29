@@ -1,26 +1,22 @@
 #!/bin/bash
 
-# Add Antivirus info ("AV_NAME AV_PATH AV_TEAM_IDENTIFIER")
-# You can check team identifier like `codesign -d -v /Library/Bitdefender/AVP/BDLDaemon`
+# Add Antivirus info ("AV_NAME AV_PKG_IDENTIFIER")
+# You can check package identifier with `pkgutil --pkgs`
 AV_LIST=(
-"BitDefender /Library/Bitdefender/AVP/BDLDaemon GUNFMW623Y"
+"BitDefender com.bitdefender.antivirusformac"
+"ESET com.eset.esetEndpointAntivirus"
+"Mcafee com.mcafee.virusscan"
+"Avast com.avast.AACM"
 )
 
 RESULT="No Antivirus Detected"
-
-check_team_identifier() {
-  test `codesign -d -v $1 2>&1 | grep TeamIdentifier | awk -F= '{print $2}'` == $2
-}
 
 for _item in "${AV_LIST[@]}"
 do
   item=($_item)
 
-  if [ -f ${item[1]} ]; then
-    check_team_identifier ${item[1]} ${item[2]}
-    if [ $? -eq 0 ]; then
-      RESULT=${item[0]}
-    fi
+  if [ $(pkgutil --pkgs | grep ${item[1]} | wc -l) -eq 1 ]; then
+    RESULT=${item[0]}
   fi
 done
 
