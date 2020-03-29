@@ -15,7 +15,7 @@ for _item in "${AV_LIST[@]}"
 do
   item=($_item)
 
-  if [ $(pkgutil --pkgs | grep ${item[1]} | wc -l) -eq 1 ]; then
+  if [ $(pkgutil --pkgs | grep ${item[1]} | wc -l) -ge 1 ]; then
     RESULT=${item[0]}
   fi
 done
